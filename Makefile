@@ -8,7 +8,7 @@ endif
 
 # Build the package
 build:
-	cd template && npm run build
+	cd template && npm install && npm run build
 
 # Development mode with watch
 dev:
