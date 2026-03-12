@@ -42,10 +42,11 @@ function getTagColor(index: number): string {
     :href="link || undefined"
     :target="link ? '_blank' : undefined"
     :rel="link ? 'noopener noreferrer' : undefined"
-    class="not-prose group flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
+    class="not-prose group flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
+    style="height: 480px;"
   >
-    <!-- Image -->
-    <div v-if="image" class="relative w-full overflow-hidden bg-gray-100 dark:bg-gray-700" style="aspect-ratio: 2 / 3;">
+    <!-- Image (2/3 of card height) -->
+    <div v-if="image" class="relative w-full shrink-0 overflow-hidden bg-gray-100 dark:bg-gray-700" style="height: 66.67%;">
       <img
         :src="image"
         :alt="title"
@@ -72,7 +73,7 @@ function getTagColor(index: number): string {
     </div>
 
     <!-- Content -->
-    <div class="flex flex-1 flex-col p-4">
+    <div class="flex min-h-0 flex-1 flex-col overflow-hidden p-4">
       <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
         {{ title }}
       </h3>
