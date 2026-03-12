@@ -1,6 +1,6 @@
 {
   "name": "@jet-w/astro-blog.component.product-card",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Reusable product card Vue component for @jet-w/astro-blog",
   "type": "module",
   "exports": {
