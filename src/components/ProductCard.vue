@@ -45,7 +45,7 @@ function getTagColor(index: number): string {
     class="not-prose group flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
   >
     <!-- Image -->
-    <div v-if="image" class="relative aspect-video w-full overflow-hidden bg-gray-100 dark:bg-gray-700">
+    <div v-if="image" class="relative w-full overflow-hidden bg-gray-100 dark:bg-gray-700" style="aspect-ratio: 2 / 3;">
       <img
         :src="image"
         :alt="title"
