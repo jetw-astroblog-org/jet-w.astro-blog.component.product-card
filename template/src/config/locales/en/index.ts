@@ -1,3 +1,6 @@
+/**
+ * English (en) locale configuration
+ */
 import { site } from './site';
 import { menu } from './menu';
 import { footer } from './footer';

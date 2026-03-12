@@ -35,7 +35,7 @@ jobs:
         env:
           # NODE_OPTIONS: --max_old_space_size=8692
           SITE_URL: https://jetw-astroblog-org.github.io
-          BASE_PATH: /jet-w.astro-blog.component.img-viewer
+          BASE_PATH: /jet-w.astro-blog.component.product-card
         run: |-
           make build
 

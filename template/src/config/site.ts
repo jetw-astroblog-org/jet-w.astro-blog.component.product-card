@@ -1,5 +1,14 @@
+/**
+ * Site Configuration
+ *
+ * Basic site settings including title, description, author info, etc.
+ */
+
 import type { SiteConfig } from '@jet-w/astro-blog';
 
+/**
+ * Site configuration
+ */
 export const siteConfig: SiteConfig = {
   title: 'Product Card Demo',
   description: 'Demo for @jet-w/astro-blog.component.product-card',
