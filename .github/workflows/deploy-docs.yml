@@ -1,5 +1,5 @@
 
-name: Deploy Component Image Viewer
+name: Deploy Component Production Card
 
 on:
   push:

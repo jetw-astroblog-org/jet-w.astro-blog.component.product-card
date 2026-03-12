@@ -10,7 +10,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@jet-w/astro-blog.component.img-viewer": "file:..",
+    "@jet-w/astro-blog.component.product-card": "file:..",
     "@astrojs/mdx": "^4.3.12",
     "@astrojs/rss": "^4.0.14",
     "@astrojs/tailwind": "^5.1.3",

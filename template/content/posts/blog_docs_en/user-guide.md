@@ -1,25 +1,30 @@
 ---
-title: Image Viewer
-description: Image Viewer User Guide
-pubDate: 2026-03-04
+title: Product Card
+description: Product Card User Guide
+pubDate: 2026-03-12
 author: jet-w
 categories:
   - Documentation
 tags:
-  - ImageViewer
+  - ProductCard
   - Component
   - Vue
 star: true
 ---
 
-# ImageViewer User Guide
+# ProductCard User Guide
 
-ImageViewer is a Vue component for browsing, filtering, and presenting images with category-based filtering, multiple layout modes, and keyboard navigation.
+ProductCard is a set of Vue components for displaying products, projects, or any card-based content with built-in search, price filtering, status badges, and responsive grid layout.
+
+The package includes two components:
+
+- **ProductCard** — A single card displaying title, description, image, price, tags, and status.
+- **ProductCardGrid** — A grid container with text search and price range filtering.
 
 ## Installation
 
 ```bash
-npm install @jet-w/astro-blog.component.img-viewer
+npm install @jet-w/astro-blog.component.product-card
 ```
 
 ## Basic Usage
@@ -28,127 +33,163 @@ npm install @jet-w/astro-blog.component.img-viewer
 
 ```astro
 ---
-import ImageViewer from '@jet-w/astro-blog.component.img-viewer/components/ImageViewer.vue';
+import ProductCardGrid from '@jet-w/astro-blog.component.product-card/components/ProductCardGrid.vue';
 
-const images = [
+const cards = [
   {
-    src: 'https://example.com/photo1.jpg',
-    title: 'Sunset Over Mountains',
-    categories: ['image'],
-    description: 'A beautiful <span class="hi">sunset</span> captured at golden hour.',
+    title: 'Mechanical Keyboard',
+    description: 'A premium 75% mechanical keyboard with hot-swappable switches.',
+    image: '/images/keyboard.jpg',
+    price: '$129.99',
+    tags: ['Electronics', 'Peripherals'],
+    link: 'https://example.com/keyboard',
+    status: 'active',
   },
   {
-    src: 'https://example.com/chart1.jpg',
-    title: 'Sales Report Q3',
-    categories: ['graph'],
+    title: 'Open Source Toolkit',
+    description: 'A curated collection of open-source developer tools.',
+    tags: ['Software', 'Open Source'],
+    price: 'Free',
+    status: 'active',
   },
 ];
 ---
 
-<ImageViewer client:load images={images} />
+<ProductCardGrid client:load cards={cards} columns={3} />
 ```
 
 ### In an MDX page (`.mdx`)
 
 ```mdx
-import ImageViewer from '@jet-w/astro-blog.component.img-viewer/components/ImageViewer.vue';
+import ProductCardGrid from '@jet-w/astro-blog.component.product-card/components/ProductCardGrid.vue';
 
-export const images = [
+export const cards = [
   {
-    src: 'https://example.com/photo1.jpg',
-    title: 'Sunset Over Mountains',
-    categories: ['image'],
+    title: 'Mechanical Keyboard',
+    description: 'A premium 75% mechanical keyboard with hot-swappable switches.',
+    image: '/images/keyboard.jpg',
+    price: '$129.99',
+    tags: ['Electronics', 'Peripherals'],
+    link: 'https://example.com/keyboard',
+    status: 'active',
   },
 ];
 
-<ImageViewer client:load images={images} />
+<ProductCardGrid client:load cards={cards} columns={3} />
 ```
 
 ::: tip MDX Note
 In MDX files, use `export const` instead of `const`. TypeScript type annotations are not supported in MDX.
 :::
 
-## Image Data Structure
+## Card Data Structure
 
-Each image object supports the following fields:
+Each card object supports the following fields:
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `src` | `string` | Yes | Image URL |
-| `title` | `string` | Yes | Display title |
-| `categories` | `string[]` | No | Category tags for filtering |
-| `description` | `string` | No | Description text, supports HTML |
+| `title` | `string` | Yes | Card title |
+| `description` | `string` | No | Description text, truncated to 2 lines with full text on hover |
+| `image` | `string` | No | Image URL, displayed as a 16:9 cover image |
+| `price` | `string` | No | Price label (e.g. `$29.99`, `Free`) |
+| `tags` | `string[]` | No | Tag labels displayed as colored badges |
+| `link` | `string` | No | URL to open in a new tab when the card is clicked |
+| `status` | `string` | No | Status badge displayed on the card |
 
 ### Example
 
 ```js
 {
-  src: '/images/architecture-diagram.png',
-  title: 'System Architecture',
-  categories: ['flowchart', 'important'],
-  description: 'The diagram shows the <span class="hi">microservice architecture</span> with message queues.',
+  title: 'Standing Desk',
+  description: 'Electric sit-stand desk with dual motors and memory presets.',
+  image: '/images/desk.jpg',
+  price: '$349.00',
+  tags: ['Furniture', 'Ergonomics'],
+  link: 'https://example.com/desk',
+  status: 'active',
 }
 ```
 
-An image can belong to multiple categories. The built-in categories are:
+## Components
 
-- `important`
-- `graph`
-- `flowchart`
-- `map`
-- `image`
+### ProductCardGrid
+
+The grid component wraps multiple `ProductCard` items with search and filtering controls.
+
+#### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `cards` | `CardItem[]` | — | Array of card data objects (required) |
+| `columns` | `number` | `3` | Number of columns at large breakpoints (`2`, `3`, or `4`) |
+
+#### Search
+
+The text search box filters cards by matching across all fields: title, description, tags, link, status, and price.
+
+#### Price Filter
+
+Enter a minimum and/or maximum price to filter cards by price range. The filter extracts numeric values from the price string (e.g. `$129.99` → `129.99`). Cards with `Free` are treated as `0`. Cards without a price are always shown.
+
+### ProductCard
+
+A single card component. It can also be used standalone without the grid.
+
+```astro
+---
+import ProductCard from '@jet-w/astro-blog.component.product-card/components/ProductCard.vue';
+---
+
+<ProductCard
+  title="Webcam Pro"
+  description="Full HD 1080p webcam with auto-focus."
+  image="/images/webcam.jpg"
+  price="$79.99"
+  tags={['Electronics', 'Video']}
+  link="https://example.com/webcam"
+  status="active"
+/>
+```
 
 ## Features
 
-### Category Filtering
+### Status Badges
 
-The toolbar displays filter buttons for each category with a count badge. Click to toggle filters. Multiple categories can be active simultaneously. Click **All** to clear all filters.
+The `status` field renders a colored badge on the card. Built-in status colors:
 
-### Layout Modes
+| Status | Color |
+|--------|-------|
+| `active` | Green |
+| `completed` | Primary (blue) |
+| `archived` | Gray |
+| `wip` | Yellow |
 
-Two layout modes are available via the layout toggle button in the toolbar:
+Any other status value displays with a default accent color.
 
-- **Stack** (default) — description appears below the image
-- **Side** — image and description are displayed side by side (max-width expands to 1400px)
+### Tags
 
-### Zoom
+Tags are displayed as rounded colored badges. Colors cycle automatically through six theme colors (primary, secondary, accent, green, yellow, cyan).
 
-Click the zoom button to toggle between 95% and 100% max-width for the displayed image.
+### Image
 
-### Full Page Mode
+When an `image` URL is provided, the card displays a 16:9 cover image at the top with a subtle zoom effect on hover. If no image is provided, the card renders without the image section.
 
-Click the full-page button or press `F` to enter full-page mode, which overlays the viewer on top of the page. Press `Escape` to exit.
+### Link
 
-### Fullscreen
+When a `link` is provided, the entire card becomes clickable and opens the URL in a new tab. Without a link, the card renders as a static `<div>`.
 
-Click the fullscreen button to enter browser native fullscreen with a dark background.
+### Description Tooltip
 
-### Random Mode
-
-Click the shuffle button to enable random navigation. When active, next/prev actions jump to a random image instead of sequential order.
-
-### Description Panel
-
-If an image has a `description` field, a **Show/Hide** toggle button appears. The description supports HTML content. Use `<span class="hi">text</span>` to highlight key terms in amber/orange.
+Long descriptions are truncated to 2 lines. Hovering over the description reveals the full text in a floating tooltip.
 
 ### Dark Mode
 
-The component automatically adapts when the parent page uses the `.dark` class on an ancestor element. Fullscreen mode always uses a dark theme.
+The component automatically adapts when the parent page uses the `.dark` class on an ancestor element.
 
-## Keyboard Shortcuts
+### Responsive Layout
 
-| Key | Action |
-|-----|--------|
-| `←` | Previous image |
-| `→` | Next image |
-| `Space` / `↑` / `↓` | Toggle description |
-| `F` | Toggle full-page mode |
-| `Escape` | Exit full-page mode |
+The grid is fully responsive:
 
-You can also click the left or right half of the image to navigate.
-
-## Navigation
-
-- **Click left half** of the image to go to the previous image
-- **Click right half** of the image to go to the next image
-- Navigation wraps around (last image goes back to first)
+- **Mobile** — 1 column
+- **Tablet** (`sm`) — 2 columns
+- **Desktop** (`lg`) — 2, 3, or 4 columns based on the `columns` prop

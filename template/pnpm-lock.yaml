@@ -23,7 +23,7 @@ importers:
       '@jet-w/astro-blog':
         specifier: ^0.2.27
         version: 0.2.27(@astrojs/mdx@4.3.13(astro@5.18.0(jiti@1.21.7)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)))(@astrojs/rss@4.0.15)(@astrojs/tailwind@5.1.5(astro@5.18.0(jiti@1.21.7)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))(tailwindcss@3.4.19(yaml@2.8.2)))(@astrojs/vue@5.1.4(astro@5.18.0(jiti@1.21.7)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))(jiti@1.21.7)(rollup@4.59.0)(vue@3.5.29(typescript@5.9.3))(yaml@2.8.2))(astro@5.18.0(jiti@1.21.7)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))(tailwindcss@3.4.19(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))
-      '@jet-w/astro-blog.component.img-viewer':
+      '@jet-w/astro-blog.component.product-card':
         specifier: file:..
         version: file:..(vue@3.5.29(typescript@5.9.3))
       '@tailwindcss/typography':
@@ -750,7 +750,7 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@jet-w/astro-blog.component.img-viewer@file:..':
+  '@jet-w/astro-blog.component.product-card@file:..':
     resolution: {directory: .., type: directory}
     peerDependencies:
       vue: ^3.5.0
@@ -3779,7 +3779,7 @@ snapshots:
   '@img/sharp-win32-x64@0.34.5':
     optional: true
 
-  '@jet-w/astro-blog.component.img-viewer@file:..(vue@3.5.29(typescript@5.9.3))':
+  '@jet-w/astro-blog.component.product-card@file:..(vue@3.5.29(typescript@5.9.3))':
     dependencies:
       vue: 3.5.29(typescript@5.9.3)
 

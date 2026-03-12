@@ -1,6 +1,3 @@
-/**
- * English (en) locale configuration
- */
 import { site } from './site';
 import { menu } from './menu';
 import { footer } from './footer';
@@ -13,7 +10,6 @@ export const enConfig = {
   footer,
   sidebar,
   ui,
-  // Content path prefix for filtering posts by locale
   contentPathPrefix: 'blog_docs_en',
 };
 

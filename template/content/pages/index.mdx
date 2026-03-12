@@ -1,55 +1,97 @@
 ---
-title: 首页
-description: 1基于Astro构建的现代化技术博客，专注于分享前端开发、技术思考和学习笔记。
+title: Product Card Demo
+description: Demo page for the ProductCard and ProductCardGrid components.
 ---
 
-import ImageViewer from '@jet-w/astro-blog.component.img-viewer/components/ImageViewer.vue';
-export const images = [
+import ProductCardGrid from '@jet-w/astro-blog.component.product-card/components/ProductCardGrid.vue';
+
+export const cards = [
   {
-    "src": 'https://picsum.photos/seed/graph1/800/500',
-    "title": 'Population Growth Chart',
-    "categories": ['graph'],
-    "description": 'This graph shows the <span class="hi">steady increase</span> in population over the past decade, with a notable acceleration between 2018 and 2022.',
+    title: 'Mechanical Keyboard',
+    description: 'A premium 75% mechanical keyboard with hot-swappable switches, RGB backlighting, and a solid aluminum frame. Perfect for developers who type all day.',
+    image: 'https://picsum.photos/seed/keyboard/600/400',
+    price: '$129.99',
+    tags: ['Electronics', 'Peripherals', 'Hot-swap'],
+    link: 'https://example.com/keyboard',
+    status: 'active',
   },
   {
-    src: 'https://picsum.photos/seed/graph2/800/500',
-    title: 'Revenue by Quarter',
-    categories: ['graph'],
-    description: 'Quarterly revenue data indicates <span class="hi">Q3</span> consistently outperforms other quarters.',
+    title: 'Ultrawide Monitor',
+    description: 'A 34-inch curved ultrawide monitor with 3440x1440 resolution, 144Hz refresh rate, and USB-C connectivity for a seamless multi-tasking experience.',
+    image: 'https://picsum.photos/seed/monitor/600/400',
+    price: '$499.00',
+    tags: ['Electronics', 'Display', '144Hz'],
+    link: 'https://example.com/monitor',
+    status: 'active',
   },
   {
-    src: 'https://picsum.photos/seed/flow1/800/500',
-    title: 'Software Development Lifecycle',
-    categories: ['flowchart'],
-    description: 'The flowchart illustrates the <span class="hi">iterative process</span> from requirements gathering through deployment.',
+    title: 'Wireless Mouse',
+    description: 'Ergonomic wireless mouse with adjustable DPI up to 16000, low-latency 2.4GHz connection, and 70-hour battery life.',
+    image: 'https://picsum.photos/seed/mouse/600/400',
+    price: '$59.99',
+    tags: ['Electronics', 'Peripherals'],
+    link: 'https://example.com/mouse',
+    status: 'active',
   },
   {
-    src: 'https://picsum.photos/seed/flow2/800/500',
-    title: 'Decision Tree Analysis',
-    categories: ['flowchart'],
+    title: 'Standing Desk',
+    description: 'Electric sit-stand desk with dual motors, memory presets, and a spacious 60x30 inch bamboo desktop.',
+    image: 'https://picsum.photos/seed/desk/600/400',
+    price: '$349.00',
+    tags: ['Furniture', 'Ergonomics'],
+    link: 'https://example.com/desk',
+    status: 'active',
   },
   {
-    src: 'https://picsum.photos/seed/map1/800/500',
-    title: 'Global Distribution Network',
-    categories: ['map'],
-    description: 'The map highlights key distribution hubs across <span class="hi">three continents</span>.',
+    title: 'USB-C Hub',
+    description: 'Compact 7-in-1 USB-C hub with HDMI 4K output, 100W pass-through charging, SD card reader, and 3 USB-A ports.',
+    image: 'https://picsum.photos/seed/usbhub/600/400',
+    price: '$39.99',
+    tags: ['Electronics', 'Accessories'],
+    link: 'https://example.com/usb-hub',
+    status: 'completed',
   },
   {
-    src: 'https://picsum.photos/seed/map2/800/500',
-    title: 'Climate Zones Overview',
-    categories: ['map'],
+    title: 'Noise-Cancelling Headphones',
+    description: 'Over-ear headphones with adaptive noise cancellation, 30-hour battery, and multipoint Bluetooth connection.',
+    image: 'https://picsum.photos/seed/headphones/600/400',
+    price: '$249.00',
+    tags: ['Audio', 'Wireless', 'ANC'],
+    link: 'https://example.com/headphones',
+    status: 'active',
   },
   {
-    src: 'https://picsum.photos/seed/img1/800/500',
-    title: 'Laboratory Equipment Setup',
-    categories: ['image'],
-    description: 'The image shows a standard lab configuration with <span class="hi">safety equipment</span> properly positioned.',
+    title: 'Desk Lamp',
+    description: 'LED desk lamp with adjustable color temperature, brightness levels, and a built-in USB charging port.',
+    price: '$45.00',
+    tags: ['Lighting', 'Accessories'],
+    status: 'wip',
   },
   {
-    src: 'https://picsum.photos/seed/img2/800/500',
-    title: 'Architectural Blueprint',
-    categories: ['image'],
+    title: 'Open Source Toolkit',
+    description: 'A curated collection of open-source developer tools. Completely free and community-driven.',
+    tags: ['Software', 'Open Source'],
+    price: 'Free',
+    link: 'https://example.com/toolkit',
+    status: 'active',
+  },
+  {
+    title: 'Webcam Pro',
+    description: 'Full HD 1080p webcam with auto-focus, built-in ring light, and privacy shutter. Ideal for video conferencing.',
+    image: 'https://picsum.photos/seed/webcam/600/400',
+    price: '$79.99',
+    tags: ['Electronics', 'Video'],
+    link: 'https://example.com/webcam',
+    status: 'archived',
   },
 ];
 
-<ImageViewer client:load images={images} />
+<div class="max-w-6xl mx-auto py-8">
+
+## Product Cards
+
+A demo of the `ProductCardGrid` component with search and price filtering.
+
+<ProductCardGrid client:load cards={cards} columns={3} />
+
+</div>

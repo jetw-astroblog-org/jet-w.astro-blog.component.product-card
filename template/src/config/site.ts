@@ -1,59 +1,29 @@
-/**
- * Site Configuration
- *
- * Basic site settings including title, description, author info, etc.
- */
-
 import type { SiteConfig } from '@jet-w/astro-blog';
 
-/**
- * Site configuration
- */
 export const siteConfig: SiteConfig = {
-  title: 'My Astro Blog22',
-  description: '',
+  title: 'Product Card Demo',
+  description: 'Demo for @jet-w/astro-blog.component.product-card',
   author: '',
-  email: 'email@example.com',
+  email: '',
   avatar: '/images/avatar.webp',
   social: {
-    github: 'https://github.com/username',
+    github: '',
     twitter: '',
     linkedin: '',
-    email: 'mailto:email@example.com'
-  },    
+    email: '',
+  },
   layout: {
-    contentWidth: 'wide'  // 或 'narrow', '900px', '80%' 等
+    contentWidth: 'wide',
   },
   menu: [
-    {
-      name: '首页',
-      href: '/',
-      icon: 'home'
-    },
-    {
-      name: '博客教学',
-      href: '/posts/blog_docs',
-      icon: 'posts'
-    },
-    {
-      name: '演示',
-      href: '/slides',
-      icon: 'slides'
-    },
-    {
-      name: '关于',
-      href: '/about',
-      icon: 'about'
-    }
-  ]
+    { name: 'Home', href: '/', icon: 'home' },
+    { name: 'About', href: '/about', icon: 'about' },
+  ],
 };
 
-/**
- * Default SEO settings
- */
 export const defaultSEO = {
   title: siteConfig.title,
   description: siteConfig.description,
   image: '/images/og-image.jpg',
-  type: 'website' as const
+  type: 'website' as const,
 };

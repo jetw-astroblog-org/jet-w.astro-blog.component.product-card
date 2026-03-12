@@ -1,7 +1,4 @@
-/**
- * English site configuration
- */
 export const site = {
-  title: 'My Astro Blog',
+  title: 'Product Card Demo',
   description: '',
 };

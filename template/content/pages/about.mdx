@@ -1,6 +1,6 @@
 ---
-title: About Image Viewer
-description: A feature-rich Vue 3 image viewer component for Astro blogs
+title: About Product Card
+description: A reusable product card Vue component for Astro blogs
 ---
 
 import TagCard from '@jet-w/astro-blog/components/about/TagCard.astro';
@@ -11,12 +11,12 @@ import ContentCard from '@jet-w/astro-blog/components/about/ContentCard.astro';
 
 <div class="text-center mb-16">
   <h1 class="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-4">
-    @jet-w/astro-blog.component.img-viewer
+    @jet-w/astro-blog.component.product-card
   </h1>
 
   <p class="text-xl text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
-    A reusable, feature-rich image viewer Vue component designed for <strong>@jet-w/astro-blog</strong>.
-    Browse, filter, and present collections of images with keyboard navigation, multiple layouts, and dark mode support.
+    A reusable product card Vue component designed for <strong>@jet-w/astro-blog</strong>.
+    Display products, projects, or any card-based content with search, price filtering, and responsive grid layout.
   </p>
 </div>
 
@@ -34,33 +34,32 @@ import ContentCard from '@jet-w/astro-blog/components/about/ContentCard.astro';
 <IconCard
   title="Features"
   items={[
-    { icon: 'search', title: 'Category Filtering', description: 'Filter images by category with multi-select checkbox filters', color: 'primary' },
-    { icon: 'code', title: 'Keyboard Navigation', description: 'Arrow keys, Space, Escape, and F key shortcuts', color: 'secondary' },
-    { icon: 'settings', title: 'Multiple Layouts', description: 'Stack and side-by-side layout modes', color: 'accent' },
-    { icon: 'video', title: 'Full Page & Fullscreen', description: 'Expand to full page or native fullscreen mode', color: 'success' },
+    { icon: 'search', title: 'Text Search', description: 'Filter cards by title, description, tags, status, and price', color: 'primary' },
+    { icon: 'code', title: 'Price Filtering', description: 'Set min/max price range to narrow down results', color: 'secondary' },
+    { icon: 'settings', title: 'Responsive Grid', description: 'Configurable 2, 3, or 4 column layouts with mobile support', color: 'accent' },
+    { icon: 'video', title: 'Status Badges', description: 'Color-coded status indicators: active, completed, wip, archived', color: 'success' },
   ]}
 />
 
 </div>
 
-<ContentCard title="What is Image Viewer?" class="mb-16">
+<ContentCard title="What is Product Card?" class="mb-16">
 
-**@jet-w/astro-blog.component.img-viewer** is a Vue 3 component that provides an interactive image browsing experience within Astro-based blogs and documentation sites.
+**@jet-w/astro-blog.component.product-card** is a Vue 3 component set that provides an interactive product/project showcase within Astro-based blogs and documentation sites.
 
-It is designed for scenarios where you need to present a collection of images — such as diagrams, flowcharts, maps, or screenshots — with rich browsing controls and optional descriptions.
+It is designed for scenarios where you need to present a collection of items — such as products, tools, projects, or resources — with rich card-based layouts and filtering controls.
 
 ### Key Capabilities
 
-- **Category Filters** — Filter images by tags like Graph, Flowchart, Map, Image, etc. Multi-select supported.
-- **Keyboard Shortcuts** — Navigate with arrow keys, toggle descriptions with Space/Up/Down, full page with F, and exit with Escape.
-- **Stack & Side Layout** — Switch between vertical (image on top, description below) and side-by-side layout.
-- **Random Mode** — Shuffle through images randomly for review or study.
-- **Zoom Toggle** — Expand the image to fill the available width.
-- **Full Page Mode** — Take over the entire viewport while staying within the page.
-- **Native Fullscreen** — Enter the browser's native fullscreen mode.
-- **Rich Descriptions** — Show/hide HTML descriptions with highlight support using the `.hi` class.
-- **Dark Mode** — Full dark mode support, including fullscreen variants.
-- **Click Navigation** — Click the left or right half of the image area to navigate.
+- **Text Search** — Filter cards by matching across title, description, tags, link, status, and price fields.
+- **Price Range Filter** — Set minimum and/or maximum price to narrow down results. Supports `Free` as a price value.
+- **Status Badges** — Color-coded badges for `active`, `completed`, `wip`, `archived`, or custom statuses.
+- **Colored Tags** — Tags displayed as rounded badges with automatically cycling theme colors.
+- **Cover Images** — Optional 16:9 cover images with hover zoom effect.
+- **Clickable Cards** — Cards with a `link` prop become clickable and open in a new tab.
+- **Description Tooltip** — Long descriptions truncated to 2 lines with full text revealed on hover.
+- **Dark Mode** — Full dark mode support, adapting automatically to the parent page theme.
+- **Responsive Grid** — 1 column on mobile, 2 on tablet, and 2/3/4 on desktop.
 
 </ContentCard>
 
@@ -69,37 +68,42 @@ It is designed for scenarios where you need to present a collection of images �
 Install the package:
 
 ```bash
-npm install @jet-w/astro-blog.component.img-viewer
+npm install @jet-w/astro-blog.component.product-card
 ```
 
 Use the component in an Astro MDX page:
 
 ```mdx
-import ImageViewer from '@jet-w/astro-blog.component.img-viewer/components/ImageViewer.vue';
+import ProductCardGrid from '@jet-w/astro-blog.component.product-card/components/ProductCardGrid.vue';
 
-export const images = [
+export const cards = [
   {
-    src: '/images/chart.png',
-    title: 'Revenue Chart',
-    categories: ['graph'],
-    description: 'Quarterly revenue with <span class="hi">Q3 peak</span>.',
+    title: 'Mechanical Keyboard',
+    description: 'A premium 75% mechanical keyboard with hot-swappable switches.',
+    image: '/images/keyboard.jpg',
+    price: '$129.99',
+    tags: ['Electronics', 'Peripherals'],
+    link: 'https://example.com/keyboard',
+    status: 'active',
   },
   {
-    src: '/images/flowchart.png',
-    title: 'CI/CD Pipeline',
-    categories: ['flowchart'],
+    title: 'Open Source Toolkit',
+    description: 'A curated collection of open-source developer tools.',
+    tags: ['Software', 'Open Source'],
+    price: 'Free',
+    status: 'active',
   },
 ];
 
-<ImageViewer client:load images={images} />
+<ProductCardGrid client:load cards={cards} columns={3} />
 ```
 
 </ContentCard>
 
 <ContentCard title="Links" class="mb-16">
 
-- [GitHub Repository](https://github.com/jet-w/jet-w.astro-blog.component.img-viewer)
-- [npm Package](https://www.npmjs.com/package/@jet-w/astro-blog.component.img-viewer)
+- [GitHub Repository](https://github.com/jet-w/jet-w.astro-blog.component.product-card)
+- [npm Package](https://www.npmjs.com/package/@jet-w/astro-blog.component.product-card)
 
 </ContentCard>
 

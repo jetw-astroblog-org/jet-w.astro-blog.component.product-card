@@ -1,25 +1,30 @@
 ---
-title: ImageViewer 使用指南
-description: ImageViewer 图片查看器组件的完整使用指南，包括图片浏览、分类筛选和展示功能。
-pubDate: 2025-01-08
+title: ProductCard 使用指南
+description: ProductCard 产品卡片组件的完整使用指南，包括产品展示、搜索筛选和网格布局功能。
+pubDate: 2026-03-12
 author: jet-w
 categories:
   - 文档
 tags:
-  - ImageViewer
+  - ProductCard
   - 组件
   - Vue
 star: true
 ---
 
-# ImageViewer 使用指南
+# ProductCard 使用指南
 
-ImageViewer 是一个 Vue 组件，提供图片浏览、分类筛选、多种布局模式和键盘导航等功能。
+ProductCard 是一组 Vue 组件，用于展示产品、项目或任何卡片式内容，内置搜索、价格筛选、状态标签和响应式网格布局。
+
+该包包含两个组件：
+
+- **ProductCard** — 单个卡片，显示标题、描述、图片、价格、标签和状态。
+- **ProductCardGrid** — 网格容器，提供文本搜索和价格区间筛选功能。
 
 ## 安装
 
 ```bash
-npm install @jet-w/astro-blog.component.img-viewer
+npm install @jet-w/astro-blog.component.product-card
 ```
 
 ## 基本用法
@@ -28,127 +33,163 @@ npm install @jet-w/astro-blog.component.img-viewer
 
 ```astro
 ---
-import ImageViewer from '@jet-w/astro-blog.component.img-viewer/components/ImageViewer.vue';
+import ProductCardGrid from '@jet-w/astro-blog.component.product-card/components/ProductCardGrid.vue';
 
-const images = [
+const cards = [
   {
-    src: 'https://example.com/photo1.jpg',
-    title: '山间日落',
-    categories: ['image'],
-    description: '在黄金时段捕捉到的<span class="hi">美丽日落</span>。',
+    title: '机械键盘',
+    description: '一款高端75%布局机械键盘，支持热插拔轴体。',
+    image: '/images/keyboard.jpg',
+    price: '$129.99',
+    tags: ['电子产品', '外设'],
+    link: 'https://example.com/keyboard',
+    status: 'active',
   },
   {
-    src: 'https://example.com/chart1.jpg',
-    title: '第三季度销售报告',
-    categories: ['graph'],
+    title: '开源工具包',
+    description: '精选的开源开发者工具合集。',
+    tags: ['软件', '开源'],
+    price: 'Free',
+    status: 'active',
   },
 ];
 ---
 
-<ImageViewer client:load images={images} />
+<ProductCardGrid client:load cards={cards} columns={3} />
 ```
 
 ### 在 MDX 页面中 (`.mdx`)
 
 ```mdx
-import ImageViewer from '@jet-w/astro-blog.component.img-viewer/components/ImageViewer.vue';
+import ProductCardGrid from '@jet-w/astro-blog.component.product-card/components/ProductCardGrid.vue';
 
-export const images = [
+export const cards = [
   {
-    src: 'https://example.com/photo1.jpg',
-    title: '山间日落',
-    categories: ['image'],
+    title: '机械键盘',
+    description: '一款高端75%布局机械键盘，支持热插拔轴体。',
+    image: '/images/keyboard.jpg',
+    price: '$129.99',
+    tags: ['电子产品', '外设'],
+    link: 'https://example.com/keyboard',
+    status: 'active',
   },
 ];
 
-<ImageViewer client:load images={images} />
+<ProductCardGrid client:load cards={cards} columns={3} />
 ```
 
 ::: tip MDX 注意事项
 在 MDX 文件中，需要使用 `export const` 而非 `const`。MDX 不支持 TypeScript 类型注解。
 :::
 
-## 图片数据结构
+## 卡片数据结构
 
-每个图片对象支持以下字段：
+每个卡片对象支持以下字段：
 
 | 字段 | 类型 | 必填 | 说明 |
 |------|------|------|------|
-| `src` | `string` | 是 | 图片 URL |
-| `title` | `string` | 是 | 显示标题 |
-| `categories` | `string[]` | 否 | 分类标签，用于筛选 |
-| `description` | `string` | 否 | 描述文字，支持 HTML |
+| `title` | `string` | 是 | 卡片标题 |
+| `description` | `string` | 否 | 描述文字，超过 2 行时截断，悬停显示完整内容 |
+| `image` | `string` | 否 | 图片 URL，以 16:9 比例的封面图展示 |
+| `price` | `string` | 否 | 价格标签（如 `$29.99`、`Free`） |
+| `tags` | `string[]` | 否 | 标签，以彩色圆角徽章形式显示 |
+| `link` | `string` | 否 | 点击卡片后在新标签页中打开的 URL |
+| `status` | `string` | 否 | 显示在卡片上的状态徽章 |
 
 ### 示例
 
 ```js
 {
-  src: '/images/architecture-diagram.png',
-  title: '系统架构图',
-  categories: ['flowchart', 'important'],
-  description: '该图展示了基于消息队列的<span class="hi">微服务架构</span>。',
+  title: '升降桌',
+  description: '电动升降桌，配备双电机和记忆预设功能。',
+  image: '/images/desk.jpg',
+  price: '$349.00',
+  tags: ['家具', '人体工学'],
+  link: 'https://example.com/desk',
+  status: 'active',
 }
 ```
 
-每张图片可以属于多个分类。内置分类包括：
+## 组件说明
 
-- `important` — 重要
-- `graph` — 图表
-- `flowchart` — 流程图
-- `map` — 地图
-- `image` — 图片
+### ProductCardGrid
+
+网格组件将多个 `ProductCard` 项目包裹在一起，并提供搜索和筛选控件。
+
+#### 属性
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `cards` | `CardItem[]` | — | 卡片数据对象数组（必填） |
+| `columns` | `number` | `3` | 大屏断点下的列数（`2`、`3` 或 `4`） |
+
+#### 搜索
+
+文本搜索框支持跨所有字段匹配：标题、描述、标签、链接、状态和价格。
+
+#### 价格筛选
+
+输入最低和/或最高价格，按价格区间筛选卡片。筛选器会从价格字符串中提取数值（如 `$129.99` → `129.99`）。`Free` 被视为 `0`。没有价格的卡片始终显示。
+
+### ProductCard
+
+单个卡片组件，也可以脱离网格独立使用。
+
+```astro
+---
+import ProductCard from '@jet-w/astro-blog.component.product-card/components/ProductCard.vue';
+---
+
+<ProductCard
+  title="高清摄像头"
+  description="全高清 1080p 摄像头，支持自动对焦。"
+  image="/images/webcam.jpg"
+  price="$79.99"
+  tags={['电子产品', '视频']}
+  link="https://example.com/webcam"
+  status="active"
+/>
+```
 
 ## 功能介绍
 
-### 分类筛选
+### 状态徽章
 
-工具栏中显示每个分类的筛选按钮，并带有数量标记。点击可切换筛选条件，支持同时选中多个分类。点击 **All** 可清除所有筛选。
+`status` 字段会在卡片上渲染一个彩色徽章。内置状态颜色：
 
-### 布局模式
+| 状态 | 颜色 |
+|------|------|
+| `active` | 绿色 |
+| `completed` | 主色调（蓝色） |
+| `archived` | 灰色 |
+| `wip` | 黄色 |
 
-通过工具栏中的布局切换按钮，可以选择两种布局模式：
+其他状态值将使用默认的强调色显示。
 
-- **堆叠模式**（默认）— 描述显示在图片下方
-- **并排模式** — 图片和描述并排显示（最大宽度扩展至 1400px）
+### 标签
 
-### 缩放
+标签以彩色圆角徽章形式显示。颜色自动在六种主题色（primary、secondary、accent、绿色、黄色、青色）之间循环。
 
-点击缩放按钮可在 95% 和 100% 最大宽度之间切换。
+### 图片
 
-### 全页模式
+提供 `image` URL 后，卡片顶部会显示一个 16:9 的封面图，悬停时有轻微的缩放效果。如果未提供图片，卡片将不显示图片区域。
 
-点击全页按钮或按 `F` 键进入全页模式，查看器将覆盖整个页面。按 `Escape` 退出。
+### 链接
 
-### 全屏模式
+提供 `link` 后，整个卡片变为可点击，并在新标签页中打开目标 URL。没有链接时，卡片渲染为静态的 `<div>` 元素。
 
-点击全屏按钮进入浏览器原生全屏模式，使用深色背景。
+### 描述提示
 
-### 随机模式
-
-点击随机按钮启用随机浏览。启用后，前进/后退操作将跳转到随机图片，而非按顺序浏览。
-
-### 描述面板
-
-如果图片包含 `description` 字段，会出现 **Show/Hide** 切换按钮。描述支持 HTML 内容，使用 `<span class="hi">文字</span>` 可以用琥珀色高亮关键词。
+较长的描述会被截断为 2 行。将鼠标悬停在描述上方时，会在浮动提示框中显示完整文本。
 
 ### 深色模式
 
-当父页面的祖先元素使用了 `.dark` 类时，组件会自动适配深色主题。全屏模式始终使用深色主题。
+当父页面的祖先元素使用了 `.dark` 类时，组件会自动适配深色主题。
 
-## 键盘快捷键
+### 响应式布局
 
-| 按键 | 功能 |
-|------|------|
-| `←` | 上一张图片 |
-| `→` | 下一张图片 |
-| `Space` / `↑` / `↓` | 切换描述显示 |
-| `F` | 切换全页模式 |
-| `Escape` | 退出全页模式 |
+网格完全响应式：
 
-也可以点击图片的左半部分或右半部分进行导航。
-
-## 导航方式
-
-- **点击图片左半部分** — 切换到上一张图片
-- **点击图片右半部分** — 切换到下一张图片
-- 导航会循环（最后一张之后回到第一张）
+- **手机** — 1 列
+- **平板** (`sm`) — 2 列
+- **桌面** (`lg`) — 根据 `columns` 属性显示 2、3 或 4 列
